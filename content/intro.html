@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -362,7 +362,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -378,6 +380,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cmslpc-cluster">CMSLPC Cluster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local">Local</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-venv-and-pip3">Using <code class="docutils literal notranslate"><span class="pre">venv</span></code> and <code class="docutils literal notranslate"><span class="pre">pip3</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-conda">Using Conda</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -390,7 +408,82 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="python-for-high-energy-physics">
 <h1>Python for High Energy Physics<a class="headerlink" href="#python-for-high-energy-physics" title="Link to this heading">#</a></h1>
 <p>This Jupyter Book contains the course material for the “Python for High Energy Physics” (HEP) workshop, which will be offered as part of PURSUE 2025. The content is designed for students who have some familiarity with the basics of pure Python (i.e., standard Python without external libraries), but it does not require formal programming experience. The primary goal of this material and the associated workshop is to provide a solid foundation for students to begin working with widely used data analysis libraries such as NumPy and Matplotlib, as well as essential tools from the Scikit-HEP ecosystem. By the end of the workshop, students will be equipped to start exploring and analyzing HEP data.</p>
-<p>This Jupyter Book is designed to be used alongside an open Jupyter Notebook, allowing you to run code examples and experiment as you learn. You may find setup instructions in the README of this project’s repository, which you can access through this link: <a class="reference external" href="https://github.com/roy-cruz/PythonHEP-Book">link</a>.</p>
+<p>Note: This Jupyter Book is designed to be used alongside an open Jupyter Notebook, allowing you to run code examples and experiment as you learn.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<section id="cmslpc-cluster">
+<h3>CMSLPC Cluster<a class="headerlink" href="#cmslpc-cluster" title="Link to this heading">#</a></h3>
+<p>First, connect to the LPC cluster by running the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8888</span>:localhost:8888<span class="w"> </span>&lt;fermi_user&gt;@cmslpc-el9.fnal.gov
+</pre></div>
+</div>
+<p>Next, run the following command to setup a directory where you will work.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>~/nobackup/PURSUE-scikithep
+<span class="nb">cd</span><span class="w"> </span>~/nobackup/PURSUE-scikithep
+</pre></div>
+</div>
+<p>We now create the environment we will be using. To do this, run the following commands.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/cms.cern.ch/cmsset_default.sh
+cmsrel<span class="w"> </span>CMSSW_14_1_0_pre3
+<span class="nb">cd</span><span class="w"> </span>CMSSW_14_1_0_pre3/src
+cmsenv
+scram-venv
+cmsenv
+</pre></div>
+</div>
+<p>To clone this repository using the following commands</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:roy-cruz/PURSUE-scikithep.git
+<span class="nb">cd</span><span class="w"> </span>PURSUE-scikithep
+</pre></div>
+</div>
+<p>Proceed to open Jupyter Lab by running.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>jupyterlab
+jupyter<span class="w"> </span>lab<span class="w"> </span>--no-browser<span class="w"> </span>--port<span class="o">=</span><span class="m">8888</span>
+</pre></div>
+</div>
+<p>Navigate to the link that appears in your terminal once it finishes starting up.</p>
+</section>
+<section id="local">
+<h3>Local<a class="headerlink" href="#local" title="Link to this heading">#</a></h3>
+<p>If you prefer working locally, you can use either pip or conda to setup your environment.</p>
+<section id="using-venv-and-pip3">
+<h4>Using <code class="docutils literal notranslate"><span class="pre">venv</span></code> and <code class="docutils literal notranslate"><span class="pre">pip3</span></code><a class="headerlink" href="#using-venv-and-pip3" title="Link to this heading">#</a></h4>
+<p>In your working directory, create a virtual environment by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</pre></div>
+</div>
+<p>and activate this environment by doing</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</pre></div>
+</div>
+<p>Now clone the repository, and install the dependencies specified in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:roy-cruz/PURSUE-scikithep.git
+<span class="nb">cd</span><span class="w"> </span>PURSUE-scikithep
+pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p>Finally, start up Jupyter Lab and navigate to the link it provides you.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab<span class="w"> </span>--no-browser
+</pre></div>
+</div>
+</section>
+<section id="using-conda">
+<h4>Using Conda<a class="headerlink" href="#using-conda" title="Link to this heading">#</a></h4>
+<p>To make an environment in conda with all of the required libraries, just run the following commands in your working directory (Note: This may take a long time.)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:roy-cruz/PURSUE-scikithep.git
+<span class="nb">cd</span><span class="w"> </span>PURSUE-scikithep
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+<p>After everything is done installing, activate the environment you just created by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>pursue-scikithep-2024
+</pre></div>
+</div>
+<p>Start up Jupyter Lab by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab<span class="w"> </span>--no-browser
+</pre></div>
+</div>
+<p>and navigate to the link that it provides you once it starts up.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="0_dictsarrs.html">Python Review</a></li>
@@ -402,6 +495,9 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="project-workbook.html">Project: Discover the Higgs!</a></li>
 </ul>
 </div>
+</section>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -449,6 +545,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cmslpc-cluster">CMSLPC Cluster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local">Local</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-venv-and-pip3">Using <code class="docutils literal notranslate"><span class="pre">venv</span></code> and <code class="docutils literal notranslate"><span class="pre">pip3</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-conda">Using Conda</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
